@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from app import app, db
 from app.models import User, Room
 

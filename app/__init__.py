@@ -7,7 +7,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'auth.login'
+login.login_view = 'login'
 login.login_message = 'Log in to access this page.'
 
 app = Flask(__name__)

@@ -10,14 +10,14 @@ from app.engine import process_matches
 import dload
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/inhouse')
+@app.route('/inhouse/index')
 @login_required
 def index():
     return render_template('index.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/inhouse/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -35,13 +35,13 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-@app.route('/logout')
+@app.route('/inhouse/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/inhouse/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -56,7 +56,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/join', methods=['GET', 'POST'])
+@app.route('/inhouse/join', methods=['GET', 'POST'])
 @login_required
 def join():
     create = CreateRoomForm()
@@ -101,7 +101,7 @@ def join():
 
     return render_template('join.html', join_form=join, create_form=create)
 
-@app.route('/user/<username>')
+@app.route('/inhouse/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
@@ -116,14 +116,14 @@ def user(username):
         mmr = 1100
     return render_template('user.html', user=user, mmr=mmr)
 
-@app.route('/room/<id>')
+@app.route('/inhouse/room/<id>')
 @login_required
 def room(id):
     room  = Room.query.filter_by(id=id).first_or_404()
     users = User.query.filter_by(room_id=id).all()
     return render_template('room.html', room=room, users=users)
 
-@app.route('/edit_profile', methods=['GET', 'POST'])
+@app.route('/inhouse/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     form = EditProfileForm()
