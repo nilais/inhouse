@@ -1,5 +1,4 @@
 from datetime import datetime
-from hashlib import md5
 from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -35,3 +34,8 @@ class Room(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+    def join(self, user):
+        user.room_id = self.id
+        self.active_users += 1
+        db.session.commit()
