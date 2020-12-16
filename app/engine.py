@@ -1,6 +1,6 @@
-import dload
-import numpy
+import urllib3, json
 import tqdm
+import numpy
 import itertools
 
 FILL_PENALTY = 300
@@ -48,9 +48,13 @@ class Player(object):
         return hash(self.config.name)
 
     def get_mmr(self):
-        url_base = 'https://na.whatismymmr.com/api/v1/summoner?name='
-        url = url_base + "+".join(self.config.name.split())
-        res = dload.json(url)
+        url_base = 'https://na.whatismymmr.com/api/v1/summoner'
+        http = urllib3.PoolManager()
+        response = http.request(
+             'GET', url_base, fields={"name" : self.config.name}
+        )
+        decoded = response.data.decode('UTF-8')
+        res = json.loads(decoded)
         if not res["normal"]["warn"]:
             mmr = res["normal"]["avg"]
         elif not res["ranked"]["warn"]:
