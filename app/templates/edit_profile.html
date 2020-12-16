@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Edit Preferences</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        Please enter your default preferences as a 5-digit integer. <br>
+        Each digit should be in the range [0, 5], where: <br>
+        <div style="margin-left:1rem;">
+            0 : I cannot play this role. <br>
+            1 : I will definitely feed if I play this role. <br>
+            2 : I will probably feed if I play this role.. <br> 
+            3 : I am indifferent about playing this role. <br>
+            4 : I would strongly prefer to play this role. <br>
+            5 : I must play this role. <br>
+        </div>
+        The digits should correspond to TOP,JGL,MID,BOT,SUP respectively. <br>
+        For example, 50411 = TOP &gt; JGL &gt;&gt; BOT = SUP &gt;&gt;&gt; JGL.  
+        <p>
+            {{ form.preferences.label }}<br>
+            {{ form.preferences(size=32) }}<br>
+            {% for error in form.preferences.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Join a lobby!</h1>
+    <form action="" method="post" novalidate>
+        {{ join_form.hidden_tag() }}
+        {{ join_form.identifier(hidden=True, value='joinf') }}
+        <p>
+            {{ join_form.room_id.label }}<br>
+            {{ join_form.room_id(size=32) }}<br>
+            {% for error in join_form.room_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ join_form.submit() }}</p>
+    </form>
+    <form action="" method="post" novalidate>
+        {{ create_form.hidden_tag() }}
+        {{ create_form.identifier(hidden=True, value='createf') }}
+        <p>
+            {{ create_form.room_id.label }}<br>
+            {{ create_form.room_id(size=32) }}<br>
+            {% for error in create_form.room_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ create_form.submit() }}</p>
+    </form>
+{% endblock %}

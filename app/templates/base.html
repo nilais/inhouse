@@ -1,0 +1,33 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - inhouses</title>
+        {% else %}
+        <title>inhouses: a matching engine</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            inhouses:
+            <a href="{{ url_for('index') }}">home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">login</a>
+            {% else %}
+            <a href="{{ url_for('join') }}">join</a>
+            <a href="{{ url_for('user', username=current_user.username) }}">profile</a>
+            <a href="{{ url_for('logout') }}">logout</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul style="color:red;list-style-type:none;padding:0;margin:0">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

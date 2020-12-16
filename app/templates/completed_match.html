@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td>
+                <h1>Completed pairing, score {{ score }}</h1>
+                Team 1:
+                {% for user in team_1 %}
+                    {{ user }}; 
+                {% endfor %} <br>
+                Team 2:
+                {% for user in team_2 %}
+                    {{ user }}; 
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <hr>
+{% endblock %}

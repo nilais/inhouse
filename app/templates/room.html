@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td>
+                <h1>Room: {{ room.id }}</h1>
+                {% for user in users %}
+                    {{ user.username }}; 
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <hr>
+{% endblock %}

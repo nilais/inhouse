@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td>
+                <h1>User: {{ user.username }}</h1>
+                <h1>MMR : {{ mmr }} </h1>
+                {% if user.preferences%}
+                    <p> Preferences: {{ user.preferences }}</p> 
+                {% else %} 
+                    <p>Preferences not set.</p> 
+                {% endif %}
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Edit your preferences</a></p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <hr>
+{% endblock %}
