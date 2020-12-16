@@ -10,11 +10,10 @@ login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Log in to access this page.'
 
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
-    db.init_app(app)
-    migrate.init_app(app, db)
-    login.init_app(app)
+app = Flask(__name__)
+app.config.from_object(Config)
+db.init_app(app)
+migrate.init_app(app, db)
+login.init_app(app)
 
 from app import routes, models

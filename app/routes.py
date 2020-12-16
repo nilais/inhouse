@@ -71,9 +71,7 @@ def join():
             # TODO: redirect to appropriate page instead?
             flash('Please set your preferences before joining a room!')
             return redirect(url_for('edit_profile'))
-        current_user.room_id = room_id
-        room.active_users += 1
-        db.session.commit()
+        room.add_user(current_user)
         if room.active_users == 10:
             # Start the matching process
             users = User.query.filter_by(room_id=id).all()
